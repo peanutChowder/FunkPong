@@ -1,0 +1,211 @@
+# Meteor general objects
+<WelcomeScreen>:
+    name: "welcomeScreen"
+    gameName: gameName
+    modeText: modeText
+    modeDesc: modeDesc
+
+    GridLayout:
+        cols: 1
+        cols: 1
+        Button:
+            id: gameName
+            background_color: 0, 0, 0, 1
+            markup: True
+            text: "[size=100][color=#FFFF00]FU[/color]PONG[/size]\n[size=30][color=#FFFF00]CLICK[size=35]HERE[/color][/size]TOBEGIN[/size]"
+
+            on_press:
+                root.manager.current = "gameScreen"
+                root.manager.transition.direction = "up"
+                root.manager.ids.gameScreen.beginGame(root.manager.ids.welcomeScreen.modeIndex)
+#        Label:
+#            markup: True
+#            text: "[size=30][color=#FFFF00]CLICK[size=35]HERE[/color][/size]TOBEGIN[/size]"
+
+        FloatLayout:
+            Button:
+                id: modeText
+                background_color: 0, 0, 0, 0
+                markup: True
+                text: "[size=50][color=#FFFF00]QUANTITY[/color]MODE[/size]"
+                on_press:
+                    root.changeGameMode()
+            Label:
+#                color: 1, 1, 0, 1
+                id: modeDesc
+                center: modeText.center_x, modeText.center_y - 50
+                markup: True
+                text: "[size=20]FOR THOSE THAT SUCK. NO ELIMINATION.[/size]"
+            Label:
+                center: modeText.center_x, modeText.center_y - 120
+                markup: True
+                text: "[color=#FFFF00]CLICK[size=25]HERE[/color][/size]TO CHANGE MODE"
+
+
+
+
+<WindowManager>:
+    id: window_manager
+
+    welcomeScreen: welcomeScreen
+    gameScreen: gameScreen
+
+    WelcomeScreen:
+        id: welcomeScreen
+        name: "welcomeScreen"
+
+    GameScreen:
+        id: gameScreen
+        name: "gameScreen"
+
+
+<Paddle>:
+    canvas:
+        Rectangle:
+            size: root.size
+            pos: self.pos
+
+<Meteor>:
+    size: 20, 20
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Ellipse:
+            size: self.size
+            pos: self.pos
+
+
+<CountDown>:
+    countNum: countNum
+
+    Label:
+        id: countNum
+        center: root.parent.center
+        text: self.text
+        markup: True
+
+# Quantity mode Objects
+<QuantityMode>:
+    countText: countText
+
+    size: self.size
+
+    CountDown:
+        id: countText
+
+# Survival mode objects
+<Score>:
+    label: scoreLabel
+    canvas:
+        Rectangle:
+            size: 500, 500
+    Label:
+        id: scoreLabel
+        center: self.center
+        text: self.text
+        markup: True
+
+<SurvivalMode>:
+    countText: countText
+    scoreText: scoreText
+    size: self.size
+    Label:
+        id: scoreText
+        top: root.height
+        center_x: 100
+        markup: True
+        text: self.text
+
+
+
+    CountDown:
+        id: countText
+
+<LifeIcon>:
+    center: self.center
+    pos: self.pos
+    canvas:
+        Color:
+            rgb: 1, 0, 0
+
+        Rectangle:
+            size: 30, 5
+            pos: self.center
+
+        Rectangle:
+            size: 24, 5
+            pos: self.center_x + 3, self.center_y - 5
+
+        Rectangle:
+            size: 14, 5
+            pos: self.center_x + 8, self.center_y - 10
+        Rectangle:
+            size: 6, 5
+            pos: self.center_x + 12, self.center_y - 15
+
+        Rectangle:
+            size: 10, 5
+            pos: self.center_x + 3, self.center_y + 5
+        Rectangle:
+            size: 10, 5
+            pos: self.center_x + 17, self.center_y + 5
+# FuMode Objects
+<FuMode>:
+    scoreText: scoreText
+    countText: countText
+    size: self.size
+    Label:
+        id: scoreText
+        top: root.height
+        center_x: 100
+        markup: True
+        text: self.text
+    CountDown:
+        id: countText
+
+<Shit>:
+    size: self.size
+    canvas:
+        Color:
+            rgb: 1, 1, 0
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<InvertedPaddle>:
+    size: self.size
+    canvas:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<Roof>:
+    size: self.size
+    canvas:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+# dashMode objects
+<DashMode>:
+    scoreText: scoreText
+    size: self.size
+    Label:
+        id: scoreText
+        top: root.height
+        center_x: 100
+        markup: True
+        text: self.text
+
+<DashBall>:
+    size: self.size
+    center: self.center
+    canvas:
+        Ellipse:
+            size: self.size
+            pos: self.center
+
+<Cactus>:
+    center: self.center
+    size: self.size
+    source: "cactus.png"
